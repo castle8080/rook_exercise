@@ -7,11 +7,20 @@ pub async fn index() -> AwResult<Markup> {
         html {
             head {
                 title { "Rook Exercise" }
+                script src="/javascript/lib/htmx.min.js" { }
             }
             body {
                 h1 { "Rook Exercise" }
-                p {
+                p id = "parent-div" {
                     "Log my exercise stuff!"
+                }
+                button
+                    hx-get = "/stats"
+                    hx-trigger = "click"
+                    hx-target = "#parent-div"
+                    hx-swap = "outerHTML"
+                {
+                    "Click Me!"
                 }
             }
         }
