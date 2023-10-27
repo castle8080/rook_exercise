@@ -13,7 +13,7 @@ async fn main() -> Result<(), std::io::Error> {
 
     println!("Starting server on {}:{}", listen_addr, listen_port);
 
-    let app_config = AppConfiguration::create_default();
+    let app_config = AppConfiguration::create_default().unwrap();
 
     HttpServer::new(move || {
         App::new()

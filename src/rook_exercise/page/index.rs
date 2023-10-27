@@ -10,17 +10,31 @@ pub async fn index() -> AwResult<Markup> {
                 script src="/javascript/lib/htmx.min.js" { }
             }
             body {
-                h1 { "Rook Exercise" }
-                p id = "parent-div" {
-                    "Log my exercise stuff!"
+                h1 { "Exercise" }
+                ul {
+                    li {
+                        a hx-get = "/activity/list"
+                          hx-trigger = "click"
+                          hx-target = "#main-content"
+                          hx-swap = "innerHTML"
+                          href = "#"
+                        {
+                            "Recent Activity"
+                        }
+                    }
+                    li {
+                        a hx-get = "/activity/add_form"
+                          hx-trigger = "click"
+                          hx-target = "#main-content"
+                          hx-swap = "innerHTML"
+                          href = "#"
+                        {
+                            "Add Activity"
+                        }
+                    }
                 }
-                button
-                    hx-get = "/stats"
-                    hx-trigger = "click"
-                    hx-target = "#parent-div"
-                    hx-swap = "outerHTML"
-                {
-                    "Click Me!"
+                div id = "main-content" {
+                    ""
                 }
             }
         }

@@ -8,7 +8,13 @@ edition = "2021"
 [dependencies]
 actix-files = "0.6.2"
 actix-web = { version = "4.4.0", features = ["openssl"] }
+async-trait = "0.1.74"
+chrono = { version = "0.4.31", features = ["serde"] }
 env_logger = "0.10.0"
 maud = { version = "0.25.0", features = ["actix-web"] }
 serde = { version = "1.0.189", features = ["derive"] }
+serde_json = "1.0.107"
+sled = "0.34.7"
+thiserror = "1.0.50"
 tokio = "1.33.0"
+uuid = { version = "1.5.0", features = ["serde", "getrandom", "v4"] }
