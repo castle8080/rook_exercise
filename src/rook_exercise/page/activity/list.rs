@@ -1,7 +1,7 @@
 use std::sync::Arc;
 
 use actix_web::{get, web, Result as AwResult};
-use maud::{html, Markup};
+use maud::{html, Markup, Render};
 
 use crate::rook_exercise::service::exercise_repo::ExerciseRepo;
 use crate::rook_exercise::model::exercise::Exercise;
@@ -13,8 +13,40 @@ async fn list_process(exercise_repo: &web::Data<Arc<dyn ExerciseRepo>>) -> Resul
 }
 
 fn list_render(exercises: Vec<Exercise>) -> Markup {
+    fn header(content: impl Render) -> Markup {
+        html! { th { (content) } }
+    }
+
+    fn cell(content: impl Render) -> Markup {
+        html! { td { (content) } }
+    }
+
+    // I want to figure out if I can manage CSS differently
+    // where you can specify style closer to the generated content, but
+    // not having to repeat it directly inline.
+
     html! {
-        div { "We have them: " (format!("items: {:?}", exercises)) }
+        div class="activity_list" {
+            h2 { "There are " (exercises.len()) " items." }
+            table {
+                tr {
+                    (header("Id"))
+                    (header("Activity"))
+                    (header("Description"))
+                    (header("Started"))
+                    (header("Ended"))
+                }
+                @for e in &exercises {
+                    tr {
+                        (cell(&e.id))
+                        (cell(&e.activity))
+                        (cell(&e.description))
+                        (cell(&e.start_dt.to_string()))
+                        (cell(&e.end_dt.to_string()))
+                    }
+                }
+            }
+        }
     }
 }
 

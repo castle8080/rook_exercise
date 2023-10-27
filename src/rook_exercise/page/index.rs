@@ -8,6 +8,7 @@ pub async fn index() -> AwResult<Markup> {
             head {
                 title { "Rook Exercise" }
                 script src="/javascript/lib/htmx.min.js" { }
+                link rel="stylesheet" href="/style.css" { }
             }
             body {
                 h1 { "Exercise" }
