@@ -15,6 +15,7 @@ impl ExerciseRepoSled {
     }
 
     fn open_table(&self, user_id: &String) -> Result<Tree, AppError> {
+        // I kind of wish I could use a nested hierarchy for tree names.
         Ok(self.db.open_tree(format!("exercise:{user_id}"))?)
     }
 }
